@@ -4,19 +4,26 @@ using UnityEngine;
 
 public class MovePositionByAxis : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField]
+    private float speed = 5f;
 
-    // Update is called once per frame
     void Update()
     {
+        //movementAxis();
+        //movementKeys();
+    }
+
+    private void movementAxis() {
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
-        Debug.Log("Horizontal: " + horizontal);
-        Debug.Log("Vertical: " + vertical);
+        Vector3 movement = new Vector3(horizontal, 0, vertical) * speed * Time.deltaTime; // smooth and frame-rate-independent movement
+        gameObject.transform.Translate(movement);
     }
+
+    private void movementKeys() {
+        Vector3 movement = InputManager.Instance.movementInput * speed * Time.deltaTime; // smooth and frame-rate-independent movement
+        gameObject.transform.Translate(movement);
+    }
+
 }
