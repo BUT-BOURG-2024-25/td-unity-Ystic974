@@ -10,6 +10,9 @@ public class InputManager : MonoBehaviour
     private InputActionReference MovementAction = null;
     [SerializeField]
     private InputActionReference JumpAction = null;
+    [SerializeField]
+    private InputActionReference MouseAction = null;
+
 
     private static InputManager _instance = null;
     public static InputManager Instance { get { return _instance; } }
@@ -35,5 +38,13 @@ public class InputManager : MonoBehaviour
 
     public void UnregisterOnJumpInput(Action<InputAction.CallbackContext> onJumpAction) {
         JumpAction.action.performed -= onJumpAction;
+    }
+
+    public void RegisterOnClick(Action<InputAction.CallbackContext> onClickAction) {
+        MouseAction.action.performed += onClickAction;
+    }
+
+    public void UnregisterOnClick(Action<InputAction.CallbackContext> onClickAction) {
+        MouseAction.action.performed -= onClickAction;
     }
 }
